@@ -3,10 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Rock Paper Scissors</title>
     <script src="index.js"></script>
 </head>
 <body>
-    
+    <div class="mainContainer">
+        <div class="titleContainer"><p class="Title">Title</p></div>
+        <div class="gameChat"><p class="chatText">Welcome message => Score => Final outcome</p></div>
+        <div class="playerChoices">
+            <p class="playerChoiceMessage">Player choice</p>
+            <div class="choicesContainer">
+                <div class="rock"><img src="assets/stone.png" frameborder="0"></img></div>
+                <div class="paper"><img src="assets/new-document.png" frameborder="0"></img></div>
+                <div class="scissors"><img src="assets/scissors.png" frameborder="0"></img></div>
+            </div>
+        </div>
+        <div class="battlefield">
+            <div class="playerIcon">
+                <p class="playerChoiceText">player choice</p>
+                <div class="imgCOntainerPlayer"></div>
+            </div>
+            <div class="computerIcon">
+                <p class="computerChoiceText">computer choice</p>
+                <div class="imgContainerCOmputer"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
