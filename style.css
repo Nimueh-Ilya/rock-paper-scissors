@@ -3,6 +3,10 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
+.gameChat {
+    display: flex;
+    justify-content: space-around;
+}
 img {
     margin: auto;
     max-height: auto;
@@ -41,6 +45,7 @@ p {
     justify-content: space-around;
     align-items: center ;
 }
-.rock, .paper, .scissors {
+div.rock, div.paper, div.scissors, .imgContainerComputer, .imgContainerPlayer {
     text-align: center;
+
 }

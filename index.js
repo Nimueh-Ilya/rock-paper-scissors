@@ -1,78 +1,100 @@
 
-let playerSelection =''
-let computerSelection=''
-let playerScore = 0
-let computerScore = 0
-function playRound(getComputerChoice,playerSelection) {
-    function getComputerChoice() {
-        let choices = ['rock', 'paper', 'scissors']
-        computerSelection =  choices[Math.floor(Math.random()*choices.length)]
-        return choices[Math.floor(Math.random()*choices.length)]
-        
-    }
+// Declare all changing elements
+const rock = document.querySelector('.rock');
+const paper = document.querySelector('.paper');
+const scissors = document.querySelector('.scissors');
+const playerChoiceMessage = document.querySelector('.playerChoiceMessage')
+const playerChoiceRender = document.querySelector('.imgContainerPlayer')
+const computerChoiceRender = document.querySelector('.imgContainerComputer')
+const title = document.querySelector('.title')
+const gameChat = document.querySelector('.chatText')
+const playerScoreMessage = document.querySelector('.playerScore')
+const computerScoreMessage = document.querySelector('.computerScore')
 
-    playerSelection =prompt('Choose your weapon')
-    getComputerChoice()
-    if (computerSelection == 'paper' && playerSelection == 'rock') {
-        computerScore++
-        
-        return  'You Lose! paper beats rock'
-        
-    } else if (computerSelection == 'rock' && playerSelection == 'scissors') {
-        computerScore++
-        
-        return  'You Lose! rock beats scissors'
-    }
-    else if (computerSelection == 'scissors' && playerSelection == 'paper') {
-        computerScore++
-        
-        return  'You Lose! scissors beat paper'
-    }
-    else if (computerSelection == 'rock' && playerSelection == 'rock') {
-        return  'tie'
-    }
-    else if (computerSelection == 'paper' && playerSelection == 'paper') {
-        return  'tie'
-    }
-    else if (computerSelection == 'scissors' && playerSelection == 'scissors') {
-        return  'tie'
-    }
-    else if (computerSelection == 'scissors' && playerSelection == 'rock') {
-        playerScore++
-
-        return  'You Win! rock beats scissors'
-    }
-    else if (computerSelection == 'paper' && playerSelection == 'scissors') {
-        playerScore++
-        
-        return  'You Win! scissors beat paper'
-    }
-    else if (computerSelection == 'rock' && playerSelection == 'paper') {
-        playerScore++
-        console.log('it works');
-        return  'You Win! paper beats rock'
-    }
-    else {
-        return 'choose rock, paper or scissors'
-        game()
-    }
-
-}
 
 function game() {
-    playerScore = 0
-    computerScore = 0
-    for (let i = 0; i < 5; i++) {
-        console.log(playRound());
-        console.log(`Your score: ${playerScore}----Computer score: ${computerScore}`);
+
+// Reset scores and choices
+let playerChoice = ''
+let computerChoice = ''
+let playerScore = 0
+let computerScore = 0
+playerChoiceRender.innerHTML = ''
+computerChoiceRender.innerHTML = ''
+    // Randomaly generate computer choice function
+function getComputerChoice() {
+    let choices = ['rock', 'paper', 'scissors']
+    computerChoice = choices[Math.floor(Math.random()*choices.length)]
+    if (computerChoice === 'rock') {
+        computerChoiceRender.innerHTML = '<img src="assets/rock.png" frameborder="0"></img>'
     }
-    if (playerScore > computerScore) {
-        console.log('You win');
+    else if (computerChoice === 'paper') {
+        computerChoiceRender.innerHTML = '<img src="assets/paper.png" frameborder="0"></img>'
+
     }
-    else if (playerScore < computerScore) {
-        console.log('You lose');
-    } 
-    else {
-        console.log(`It's a tie`);
+    else if (computerChoice === 'scissors') {
+        computerChoiceRender.innerHTML = '<img src="assets/scissors.png" frameborder="0"></img>'
+
     }
 }
+function playRound() {
+
+    if (computerChoice == 'paper' && playerChoice == 'rock') {
+        computerScore++
+    } 
+    else if (computerChoice == 'rock' && playerChoice == 'scissors') {
+        computerScore++
+    }
+    else if (computerChoice == 'scissors' && playerChoice == 'paper') {
+        computerScore++
+    }
+    
+    else if (computerChoice == 'rock' && playerChoice == 'rock') {
+    }
+    else if (computerChoice == 'paper' && playerChoice == 'paper') {
+    }
+    else if (computerChoice == 'scissors' && playerChoice == 'scissors') {
+    }
+    
+    else if (computerChoice == 'scissors' && playerChoice == 'rock') {
+        playerScore++
+    }
+    else if (computerChoice == 'paper' && playerChoice == 'scissors') {
+        playerScore++
+    }
+    else if (computerChoice == 'rock' && playerChoice == 'paper') {
+        playerScore++
+    }
+
+}
+// Function to run the game when player makes choice
+
+function updateScore() {
+    playerScoreMessage.innerText = `Player Score : ${playerScore}` 
+    computerScoreMessage.innerText = `Computer Score : ${computerScore}` 
+    gameChat.innerText = ''
+    if (playerScore === 5 ) {
+        gameChat.innerText = 'You win'
+        playerScore = 0
+        computerScore = 0
+    }
+    else if (computerScore === 5 ) {
+        gameChat.innerText = 'You lose'
+        playerScore = 0
+        computerScore = 0
+    }
+}
+function choice(e) {
+    getComputerChoice()
+    playerChoiceMessage.innerText = `You chose ${e.target.className}`
+    playerChoiceRender.innerHTML = `<img src="assets/${e.target.className}.png" frameborder="0"></img>`
+    playerChoice = `${e.target.className}`
+    playRound()
+    updateScore()
+}
+// Configure event listeners and what they modify
+rock.addEventListener('click',choice)
+paper.addEventListener('click',choice)
+scissors.addEventListener('click',choice)
+}
+game()
